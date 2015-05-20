@@ -58,6 +58,7 @@ namespace List.Tests
         };
 
 
+        [Fact]
         public void InternalArrayMustBeResizedAutomaticallyWhenExceedingItsCapacity()
         {
             var testTarget = new List<int>(4);
@@ -71,6 +72,15 @@ namespace List.Tests
 
             Assert.True(testTarget.Capacity > 4);
 
+        }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(0)]
+        [InlineData(-42)]
+        public void ConstructorMustThrowExceptionWhenInitialCapacityIsLessThenTwo(int initialCapacity)
+        {
+            Assert.Throws<System.ArgumentException>(() => new List<int>(initialCapacity));
         }
     }
    

@@ -10,7 +10,6 @@ namespace List.Production
     {
         private int _count;
         private T[] _internalArray;
-        private int p;
 
         public List()
         {
@@ -19,7 +18,10 @@ namespace List.Production
 
         public List(int initalCapacity)
         {
+            if (initalCapacity < 2)
+             throw new ArgumentException("initialCapacity cannot be less than two", initalCapacity.ToString());
             _internalArray = new T[initalCapacity];
+            
         }
 
         public int Count { get { return _count ; } }
