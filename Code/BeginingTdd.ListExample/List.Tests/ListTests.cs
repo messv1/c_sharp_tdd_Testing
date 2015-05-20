@@ -56,9 +56,23 @@ namespace List.Tests
             new object[] { new int[] { 1, 2 ,3 ,4 }, 1, 2 },
             new object[] { new string[] { "Hello", "World" }, 0, "Hello" }
         };
-    }
 
-    
+
+        public void InternalArrayMustBeResizedAutomaticallyWhenExceedingItsCapacity()
+        {
+            var testTarget = new List<int>(4);
+            Assert.Equal(4, testTarget.Capacity);
+
+            var random = new System.Random();
+            for (int i = 0; i < 5; i++)
+            {
+                testTarget.Add(random.Next());
+            }
+
+            Assert.True(testTarget.Capacity > 4);
+
+        }
+    }
    
 
 }
